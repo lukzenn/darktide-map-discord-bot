@@ -3,10 +3,6 @@ from bs4 import BeautifulSoup
 import json
 
 
-def format_mission(mission):
-    return f"<t:{int(mission['start'])}:R> **{mission['circumstance']['name']}**  {mission['name']}  `/mmtimport {mission['id']}`"
-
-
 def scrape_missions():
     url = 'https://darkti.de/mission-board'
     html = request.urlopen(url).read()

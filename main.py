@@ -51,6 +51,18 @@ async def tough_right_now(ctx):
     await ctx.response.send_message(message)
     print(f'responded with {len(missions)} current missions')
 
+@client.tree.command(description = 'Shows any tough Damnation missions from the last 24 hours')
+async def tough_right_now(ctx):
+    print(f'Missions from last 24h requested')
+    mission_manager.update_missions()
+    message = ''
+    missions = mission_manager.get_recent_missions(3600*24)
+    for mission in missions:
+        message = message + '\n' + mission_manager.format_mission_for_discord(mission)
+    await ctx.response.send_message(message)
+    print(f'responded with {len(missions)} missions')
+
+
 @client.event
 async def on_ready():
     print(f"We have logged in as {client.user}")
