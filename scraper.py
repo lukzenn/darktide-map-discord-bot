@@ -2,7 +2,7 @@ from urllib import request
 from bs4 import BeautifulSoup
 import json
 
-
+#TODO Use _data endpoint instead of scraping html...
 def scrape_missions():
     mission_list = {}
     try:
