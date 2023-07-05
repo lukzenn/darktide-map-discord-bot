@@ -39,14 +39,16 @@ async def ping(interaction: discord.Interaction):
 async def tough_right_now(ctx):
     print(f'Current missions requested')
     message = mission_manager.get_current_missions()
-    await ctx.response.send_message(message)
+    if not message:
+        await ctx.response.send_message(message)
 
 
 @client.tree.command(description = 'Shows any tough Damnation missions from the last 24 hours')
 async def tough_and_recent(ctx,hours_ago:int=24):
-    print(f'Missions from last 24h requested')
+    print(f'Missions from last {hours_ago}h requested')
     message = mission_manager.get_recent_missions(hours_ago*3600)
-    await ctx.response.send_message(message)
+    if not message:
+        await ctx.response.send_message(message)
 
 
 
