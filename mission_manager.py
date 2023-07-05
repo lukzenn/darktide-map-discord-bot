@@ -54,7 +54,7 @@ def get_recent_missions(since_seconds_ago):
 
     message = ''
     if not recent_missions:
-        message = 'No missions on the board'
+        message = ''
     else:
         for mission in recent_missions:
             message = message + '\n' + format_mission_for_discord(mission)
