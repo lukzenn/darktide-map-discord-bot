@@ -4,12 +4,16 @@ import json
 
 
 def scrape_missions():
-    url = 'https://darkti.de/mission-board'
-    html = request.urlopen(url).read()
-    soup = BeautifulSoup(html, 'html.parser')
-    script_tag = soup.find("script")
-    mission_list = json.loads(remove_junk(script_tag.string))["missions"]
-    print(f"Scraper: {len(mission_list)} current missions on darkti.de")
+    mission_list = {}
+    try:
+        url = 'https://darkti.de/mission-board'
+        html = request.urlopen(url).read()
+        soup = BeautifulSoup(html, 'html.parser')
+        script_tag = soup.find("script")
+        mission_list = json.loads(remove_junk(script_tag.string))["missions"]
+        print(f"Scraper: {len(mission_list)} current missions on darkti.de")
+    except:
+        print('Failed getting missions')
     return mission_list
 
 
