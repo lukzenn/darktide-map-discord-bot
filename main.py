@@ -13,6 +13,7 @@ token = os.getenv("TOKEN")
 DORKTIDE_MAP_CHANNEL = 1124526082566131753
 DORKTIDE_GUILD = discord.Object(id=1050951439524044840)
 LEWDS_GUILD = discord.Object(id=589400038120357888)
+KARK_GUILD = discord.Object(id=1075774178344583229)
 
 class DarktideMapBot(discord.Client):
     def __init__(self, *, intents: discord.Intents):
@@ -25,6 +26,8 @@ class DarktideMapBot(discord.Client):
         await self.tree.sync(guild=DORKTIDE_GUILD)
         self.tree.copy_global_to(guild=LEWDS_GUILD)
         await self.tree.sync(guild=LEWDS_GUILD)
+        self.tree.copy_global_to(guild=KARK_GUILD)
+        await self.tree.sync(guild=KARK_GUILD)
         print('Command trees synced')
 
 
@@ -40,6 +43,8 @@ async def tough_right_now(ctx):
     print(f'Current missions requested')
     message = mission_manager.get_current_missions()
     if not message:
+        await ctx.response.send_message('No tough missions on the board right now')
+    else:
         await ctx.response.send_message(message)
 
 
@@ -48,6 +53,8 @@ async def tough_and_recent(ctx,hours_ago:int=24):
     print(f'Missions from last {hours_ago}h requested')
     message = mission_manager.get_recent_missions(hours_ago*3600)
     if not message:
+        await ctx.response.send_message('No tough missions found')
+    else:
         await ctx.response.send_message(message)
 
 
