@@ -17,15 +17,16 @@ karkersMapChannelId = 1117124786238279760
 # when bot online
 @client.event
 async def on_ready():
-    message = mission_manager.get_current_missions()
-    print('Posting auto-message')
-    try:
-        await client.get_channel(dorkTideMapChannelId).send(message)
-        await client.get_channel(karkersMapChannelId).send(message)
-    except:
-        print('Failed to send missions. Likely empty.')
+    print('Signed in. Posting auto-message.')
+    await client.get_channel(dorkTideMapChannelId).send(message)
+    await client.get_channel(karkersMapChannelId).send(message)
     await client.close()
+    quit()
 
-
-load_dotenv()
-client.run(os.getenv('TOKEN'))
+message = mission_manager.get_current_missions()
+if not message:
+    print('no tough missions on the board. aborting auto-post.')
+    quit()
+else:
+    load_dotenv()
+    client.run(os.getenv('TOKEN'))
