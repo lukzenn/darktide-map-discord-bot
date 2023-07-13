@@ -6,26 +6,31 @@ from dotenv import load_dotenv
 import os
 import mission_manager
 
+from base_logger import logger
+
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 
 #TODO: A command for server admins to add their own channels to this list (stored in SQLite)
-dorkTideMapChannelId = 1124526082566131753
-karkersMapChannelId = 1117124786238279760
 
+subscribed_channel_list = []
+subscribed_channel_list.append(1124526082566131753) #dorktide
+subscribed_channel_list.append(1117124786238279760) #karks
+subscribed_channel_list.append(1128840198768296008) #jsat
 
 # when bot online
 @client.event
 async def on_ready():
-    print('Signed in. Posting auto-message.')
-    await client.get_channel(dorkTideMapChannelId).send(message)
-    await client.get_channel(karkersMapChannelId).send(message)
+    logger.info('Signed in. Posting auto-message.')
+    for channel_id in subscribed_channel_list:
+        await client.get_channel(channel_id).send(message)
+    logger.info('Messages sent. Closing client.')
     await client.close()
     quit()
 
 message = mission_manager.get_current_missions()
 if not message:
-    print('no tough missions on the board. aborting auto-post.')
+    logger.info('no tough missions on the board. aborting auto-post.')
     quit()
 else:
     load_dotenv()
