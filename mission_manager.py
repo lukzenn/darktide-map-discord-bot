@@ -3,6 +3,8 @@ import scraper
 from datetime import datetime
 import json
 
+from base_logger import logger
+
 cache = SqliteDict("cache.sqlite3")
 
 # Extra metadata for modifiers
@@ -68,6 +70,7 @@ def get_recent_missions(since_seconds_ago):
         if len(recent_missions) > 13:
             break
         if data['start'] > since_timestamp:
+            # If modifier marked as 'tough', include it in the list. Unknown modifiers are always considered "tough".
             if modifiers_dict.get(data['circumstance']['name'], {}).get('tough', True):
                 recent_missions.append(data)
 
@@ -83,10 +86,9 @@ def get_recent_missions(since_seconds_ago):
 
 # Scrape darkti.de mission board, discard anything below Damnation, prep data and store into cache as id:Dict
 def update_missions():
-    print(f"{len(cache)} already in cache. Updating...")
+    logger.info(f"{len(cache)} already in cache. Updating...")
     current_missions = scraper.scrape_missions()
     current_missions = filter_damnations(current_missions)
-    print(f"{len(current_missions)} current damnations")
     for mission in current_missions:
         mission = prep_mission_data(mission)
         map_id = mission["id"]
