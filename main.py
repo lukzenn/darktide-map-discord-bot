@@ -4,16 +4,13 @@ from base_logger import logger
 
 import discord
 from discord import app_commands
-from discord.ext import tasks
 
 import mission_manager
+import subscription_manager
 
 # Setup
 load_dotenv()
 token = os.getenv("TOKEN")
-
-
-DORKTIDE_MAP_CHANNEL = 1124526082566131753
 
 guilds = []
 guilds.append(discord.Object(id=1050951439524044840)) #dorktide
@@ -28,9 +25,10 @@ class DarktideMapBot(discord.Client):
 
     async def setup_hook(self):
         logger.info('Syncing command trees...')
-        for guild in guilds:
-            self.tree.copy_global_to(guild=guild)
-            await self.tree.sync(guild=guild)
+        #for guild in guilds:
+            #self.tree.copy_global_to(guild=guild)
+            #await self.tree.sync(guild=guild)
+        await self.tree.sync()
         logger.info('Command trees synced')
 
 
@@ -61,6 +59,31 @@ async def tough_and_recent(ctx,hours_ago:int=24):
         await ctx.response.send_message(message)
 
 
+# Subscribe channel to receive regular updates on current tough missions.
+@client.tree.command(description = 'Enrol for regular tough mission updates to this very channel (Admin)')
+@app_commands.checks.has_permissions(administrator=True)
+async def subscribe(ctx):
+    logger.info(f'Subscribe request from {ctx.user.name}')
+    if not ctx.user.guild_permissions.administrator:
+        await ctx.response.send_message("You're not an administrator")
+        return
+    response = subscription_manager.subscribe(ctx.channel.id)
+    await ctx.response.send_message(response)
+    user = await client.fetch_user(189359111219970049)
+    await user.send(f'Server {ctx.guild.name} subscribed. User: {ctx.user.name} UserID: {ctx.user.id}')
+
+@client.tree.command(description = 'Stop automatic posts to this channel (Admin)')
+@app_commands.checks.has_permissions(administrator=True)
+async def unsubscribe(ctx):
+    if not ctx.user.guild_permissions.administrator:
+        await ctx.response.send_message("You're not an administrator")
+        return
+    response = subscription_manager.unsubscribe(ctx.channel.id)
+    await ctx.response.send_message(response)
+    user = await client.fetch_user(189359111219970049)
+    await user.send(f'Server {ctx.guild.name} unsubscribed.')
+
+
 
 @client.event
 async def on_ready():
@@ -69,10 +92,10 @@ async def on_ready():
 
 
 # TODO Use this loop to do send auto-posts instead of cronjob?
-@tasks.loop(seconds=10)
-async def myloop():
-    channel = client.get_channel(DORKTIDE_MAP_CHANNEL)
-    print('Looping!')
+# @tasks.loop(seconds=10)
+# async def myloop():
+#     channel = client.get_channel(DORKTIDE_MAP_CHANNEL)
+#     print('Looping!')
 
 # RUN
 client.run(token)
