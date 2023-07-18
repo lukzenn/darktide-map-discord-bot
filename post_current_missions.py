@@ -1,4 +1,4 @@
-## Posts current missions to all subscribed channels.
+## Posts current missions to all subscribed channels via discord http API.
 ## Invoked every 30 minutes via cronjob.
 
 import requests
@@ -17,7 +17,7 @@ from base_logger import logger
 
 def post_to_all_subscribers(message=str):
     load_dotenv()
-    token = os.getenv("TSTBT")
+    token = os.getenv("TOKEN")
     headers = {'Authorization': f'Bot {token}'}
     session = requests.Session()
     session.headers.update(headers)
