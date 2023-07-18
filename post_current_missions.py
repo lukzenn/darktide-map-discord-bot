@@ -1,37 +1,55 @@
-# Posts current missions to Dorktide, then closes
-# To be run every 30 minutes via CronJob
+## Posts current missions to all subscribed channels.
+## Invoked every 30 minutes via cronjob.
 
-import discord
-from dotenv import load_dotenv
+import requests
 import os
-import mission_manager
+from dotenv import load_dotenv
 
+import mission_manager
+import subscription_manager
 from base_logger import logger
 
-intents = discord.Intents.default()
-client = discord.Client(intents=intents)
+#subscribed_channel_list = []
+#subscribed_channel_list.append(1124526082566131753) #dorktide
+#subscribed_channel_list.append(1117124786238279760) #karks
+#subscribed_channel_list.append(1128840198768296008) #jsat
+#subscribed_channel_list.append(1127365267715018934) #ABOBUS
 
-#TODO: A command for server admins to add their own channels to this list (stored in SQLite)
+def post_to_all_subscribers(message=str):
+    load_dotenv()
+    token = os.getenv("TSTBT")
+    headers = {'Authorization': f'Bot {token}'}
+    session = requests.Session()
+    session.headers.update(headers)
 
-subscribed_channel_list = []
-subscribed_channel_list.append(1124526082566131753) #dorktide
-subscribed_channel_list.append(1117124786238279760) #karks
-subscribed_channel_list.append(1128840198768296008) #jsat
+    subscribed_channel_list = subscription_manager.get_subscriptions()
 
-# when bot online
-@client.event
-async def on_ready():
-    logger.info('Signed in. Posting auto-message.')
     for channel_id in subscribed_channel_list:
-        await client.get_channel(channel_id).send(message)
-    logger.info('Messages sent. Closing client.')
-    await client.close()
-    quit()
+        try:
+            response = session.post(
+              f"https://discord.com/api/v6/channels/{channel_id}/messages",
+              headers=headers,
+              json={"content": message}
+            )
+            logger.info(f'{response} for channel id {channel_id}')
+        except requests.exceptions.HTTPError as errh:
+            logger.error(errh)
+        except requests.exceptions.ConnectionError as errc:
+            logger.error(errc)
+        except requests.exceptions.Timeout as errt:
+            logger.error(errt)
+        except requests.exceptions.RequestException as err:
+            logger.error(err)
+    logger.info('All messages posted.')
+
 
 message = mission_manager.get_current_missions()
 if not message:
-    logger.info('no tough missions on the board. aborting auto-post.')
-    quit()
+    logger.info('No tough missions on the board. Aborting auto-post.')
+    exit()
 else:
-    load_dotenv()
-    client.run(os.getenv('TOKEN'))
+    post_to_all_subscribers(message)
+
+
+
+
