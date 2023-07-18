@@ -10,7 +10,7 @@ def scrape_missions():
         response = urlopen(url)
         response_data = json.loads(response.read())
         mission_list = response_data['missions']
-        logger.info(f"{len(mission_list)} current missions via darkti.de")
+        logger.info(f"Successfully fetched missions from darkti.de ({len(mission_list)} current missions)")
     except Exception as e:
         logger.error(f'Failed getting missions... {e}')
     return mission_list
