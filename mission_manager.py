@@ -51,16 +51,8 @@ def get_current_missions():
     return get_recent_missions(1800)
 
 
-# for troubleshooting
-def dump_db_to_json():
-    with open("data.json", "w") as outfile:
-        cached_missions = [*cache.items()]
-        # json_data refers to the above JSON
-        json.dump(cached_missions, outfile)
-
-
 # Return missions that started in the last X seconds
-def get_recent_missions(since_seconds_ago):
+def get_recent_missions(since_seconds_ago, tough_only=True):
     update_missions()
 
     since_timestamp = datetime.timestamp(datetime.now()) - since_seconds_ago
@@ -69,14 +61,20 @@ def get_recent_missions(since_seconds_ago):
     cached_missions.reverse()
 
     recent_missions = []
-    for map_id, data in cached_missions:
-        # print(f"{data['start']}, {data['circumstance']['name']}")
+    for map_id, mission in cached_missions:
+        # print(f"{mission['start']}, {mission['circumstance']['name']}")
         if len(recent_missions) > 13:
             break
-        if data['start'] > since_timestamp:
-            # If modifier marked as 'tough', include it in the list. Unknown modifiers are always considered "tough".
-            if modifiers_dict.get(data['circumstance']['name'], {}).get('tough', True):
-                recent_missions.append(data)
+
+        if mission['start'] > since_timestamp:
+            pass
+
+        # If modifier marked as 'tough', include it in the list. Unknown modifiers are always considered "tough".
+        if tough_only and modifiers_dict.get(mission['circumstance']['name'], {}).get('tough', True):
+                recent_missions.append(mission)
+
+        if not tough_only and mission['circumstance']['name'] is not 'Standard':
+                recent_missions.append(mission)
 
     message = ''
     if not recent_missions:
@@ -86,6 +84,9 @@ def get_recent_missions(since_seconds_ago):
             message = message + '\n' + format_mission_for_discord(mission)
 
     return message
+
+def interesting_and_recent(since_seconds_ago):
+    return get_recent_missions(1800, tough_only=False)
 
 
 # Scrape darkti.de mission board, discard anything below Damnation, prep data and store into cache as id:Dict
@@ -113,3 +114,10 @@ def prep_mission_data(mission):
         mission["circumstance"] = {"name": "Standard"}
     mission['start'] = int(mission['start'] / 1000)
     return mission
+
+# for troubleshooting
+def dump_db_to_json():
+    with open("data.json", "w") as outfile:
+        cached_missions = [*cache.items()]
+        # json_data refers to the above JSON
+        json.dump(cached_missions, outfile)

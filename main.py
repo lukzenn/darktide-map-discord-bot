@@ -17,6 +17,8 @@ guilds.append(discord.Object(id=1050951439524044840)) #dorktide
 guilds.append(discord.Object(id=589400038120357888)) #LEWDS
 guilds.append(discord.Object(id=1075774178344583229)) #kark
 
+bot_owner = 189359111219970049
+
 
 class DarktideMapBot(discord.Client):
     def __init__(self, *, intents: discord.Intents):
@@ -49,7 +51,7 @@ async def tough_right_now(ctx):
         await ctx.response.send_message(message)
 
 
-@client.tree.command(description = 'Shows any tough Damnation missions from the last 24 hours')
+@client.tree.command(description = 'Shows tough Damnation missions from the last 24 hours')
 async def tough_and_recent(ctx,hours_ago:int=24):
     logger.info(f'Missions from last {hours_ago}h requested')
     message = mission_manager.get_recent_missions(hours_ago*3600)
@@ -58,9 +60,18 @@ async def tough_and_recent(ctx,hours_ago:int=24):
     else:
         await ctx.response.send_message(message)
 
+@client.tree.command(description = 'Shows Damnation missions with active modifiers from the last 2 hours. 12 missions max.')
+async def interesting_and_recent(ctx,hours_ago:int=2):
+    logger.info(f'Interesting missions from last {hours_ago}h requested')
+    message = mission_manager.get_recent_missions(hours_ago*3600)
+    if not message:
+        await ctx.response.send_message('No tough missions found')
+    else:
+        await ctx.response.send_message(message)
+
 
 # Subscribe channel to receive regular updates on current tough missions.
-@client.tree.command(description = 'Enrol for regular tough mission updates to this very channel (Admin)')
+@client.tree.command(description='Enrol for regular tough mission updates to this very channel (Admin only)')
 @app_commands.checks.has_permissions(administrator=True)
 async def subscribe(ctx):
     logger.info(f'Subscribe request from {ctx.user.name}')
@@ -69,10 +80,11 @@ async def subscribe(ctx):
         return
     response = subscription_manager.subscribe(ctx.channel.id)
     await ctx.response.send_message(response)
-    user = await client.fetch_user(189359111219970049)
+    user = await client.fetch_user(bot_owner)
     await user.send(f'Server {ctx.guild.name} subscribed. User: {ctx.user.name} UserID: {ctx.user.id}')
 
-@client.tree.command(description = 'Stop automatic posts to this channel (Admin)')
+
+@client.tree.command(description='Stop automatic posts to this channel (Admin only)')
 @app_commands.checks.has_permissions(administrator=True)
 async def unsubscribe(ctx):
     if not ctx.user.guild_permissions.administrator:
@@ -80,7 +92,7 @@ async def unsubscribe(ctx):
         return
     response = subscription_manager.unsubscribe(ctx.channel.id)
     await ctx.response.send_message(response)
-    user = await client.fetch_user(189359111219970049)
+    user = await client.fetch_user(bot_owner)
     await user.send(f'Server {ctx.guild.name} unsubscribed.')
 
 

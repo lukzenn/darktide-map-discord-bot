@@ -15,7 +15,7 @@ def subscribe(channel_id=str):
     else:
         subs.append(str(channel_id))
         write_subscriptions(subs)
-        return ":first_quarter_moon: **Channel subscribed!** Every 30 minutes the bot will check for tough missions, and post them here (if there are any)."
+        return ":first_quarter_moon: **Channel subscribed!** Every 30 minutes the bot will check for tough missions, and post them here (if there are any).\nIf this is a restricted channel, make sure the bot has permissions to send messages."
 
 
 def unsubscribe(channel_id=str):
