@@ -6,24 +6,24 @@ Thanks to [darkti.de](https://darkti.de/) for providing the mission data.
 
 **Use the bot on your discord server:** [Link to Discord invite](https://discord.com/api/oauth2/authorize?client_id=1124539518826074192&permissions=68608&scope=bot%20applications.commands)
 
-**ManyMoreTries mod for Darktide:** [Link to Nexusmods](https://www.nexusmods.com/warhammer40kdarktide/mods/175)
+**ManyMoreTries mod for Darktide:** [Link to NexusMods](https://www.nexusmods.com/warhammer40kdarktide/mods/175)
 
 Once added to your server, you can use /commands to interact with the bot.
 
 ### Available Commands
 
-### `/subscribe`
+`/subscribe`  
 Subscribes the current discord channel. Every hour, the bot will post any current Damnation Maelstrom maps and their Map IDs to the channel. Admin only.
 
-### `/maelstrom_right_now`
+`/maelstrom_right_now`  
 Posts current Damnation Maelstrom maps and their Map IDs.
 
-### `/tough_right_now`
+`/tough_right_now`  
 Posts current tough Damnation maps and their Map IDs.
 
-### `/tough_and_recent`
+`/tough_and_recent`  
 Posts tough Damnation maps from the last 12 hours (maximum 13   missions). Add a number after the command to get missions from the last X hours.
 
-### `/unsubscribe`
+`/unsubscribe`  
 Unsubscribes the current channel from receiving regular updates on Maelstrom maps.
 
