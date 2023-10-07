@@ -1,21 +1,32 @@
+# Can be called by main.py (bot) to add new subscribers to the json list
+# Can be called by post_current_missions or post_current_maelstroms to get current subscribers, so they can send out mission updates
+
+import json
+
+filename = 'data/subscriptions.json'
+
+
 def get_subscriptions():
-    with open('subscriptions.txt', 'r') as filehandle:
-        subscriptions = [sub_id.rstrip() for sub_id in filehandle.readlines()]
+    with open(filename, 'r') as filehandle:
+        subscriptions = json.load(filehandle)
     return subscriptions
 
-def write_subscriptions(subs=[]):
-    with open('subscriptions.txt', 'w') as filehandle:
-        filehandle.writelines(sub_id + '\n' for sub_id in subs)
-    filehandle.close()
 
-def subscribe(channel_id=str):
+def write_subscriptions(subs={}):
+    with open(filename, 'w') as filehandle:
+        json.dump(subs, filehandle, indent=6)
+
+
+def subscribe(channel_id=str, guild_name=str, owner_id=str):
     subs = get_subscriptions()
     if str(channel_id) in subs:
         return 'Channel already subscribed'
     else:
-        subs.append(str(channel_id))
+        subs[channel_id] = {"channel_id": str(channel_id), "guild_name": guild_name, "owner_id": str(owner_id)}
         write_subscriptions(subs)
-        return ":first_quarter_moon: **Channel subscribed!** Every 30 minutes the bot will check for tough missions, and post them here (if there are any).\nIf this is a restricted channel, make sure the bot has permissions to send messages."
+        return ":first_quarter_moon: **Channel subscribed!** Every 30 minutes the bot will check for tough missions, " \
+               "and post them here (if there are any).\nIf this is a restricted channel, make sure the bot has " \
+               "permissions to send messages."
 
 
 def unsubscribe(channel_id=str):
@@ -23,7 +34,6 @@ def unsubscribe(channel_id=str):
     if str(channel_id) not in subs:
         return "This channel is not subscribed"
     else:
-        subs.remove(str(channel_id))
+        del subs[str(channel_id)]
         write_subscriptions(subs)
         return ":new_moon: **Channel unsubscribed**"
-

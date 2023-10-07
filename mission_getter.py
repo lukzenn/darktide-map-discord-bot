@@ -1,9 +1,12 @@
+# Fetches missions from the darkti.de mission board
+
 from urllib.request import urlopen
 import json
 
 from base_logger import logger
 
-def scrape_missions():
+
+def get_missions():
     mission_list = {}
     try:
         url = 'https://darkti.de/mission-board?_data'
