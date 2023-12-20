@@ -2,7 +2,7 @@
 A Discord bot to find the toughest Map IDs for _Warhammer 40,000: Darktide_ even after they disappeared from the mission board.
 Best enjoyed alongside the _ManyMoreTries_ mod so you can keep playing these missions for up to 24 hours.
 
-Thanks to [darkti.de](https://darkti.de/) for providing the mission data.
+Thanks to [darkti.de](https://darkti.de/) (by raindish) and [Maelstroom](https://maelstroom.net/) (by Grimalackt)   for providing the mission data.
 
 **Use the bot on your discord server:** [Link to Discord invite](https://discord.com/api/oauth2/authorize?client_id=1124539518826074192&permissions=68608&scope=bot%20applications.commands)
 

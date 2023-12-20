@@ -65,8 +65,8 @@ async def tough_right_now(ctx):
         await ctx.response.send_message(message)
 
 
-@client.tree.command(description='Shows tough Damnation missions from the last 24 hours')
-async def tough_and_recent(ctx, hours_ago: int = 24):
+@client.tree.command(description='Shows tough Damnation missions from the last 3 hours (maximum 14)')
+async def tough_and_recent(ctx, hours_ago: int = 3):
     logger.info(f'Missions from last {hours_ago}h requested')
     message = mission_manager.get_recent_missions(hours_ago * 3600)
     if not message:

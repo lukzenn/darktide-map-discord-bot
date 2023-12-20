@@ -5,15 +5,19 @@ import json
 
 from base_logger import logger
 
+maelstroom = 'https://maelstroom.net/DT.json'
+darkti_dot_de = 'https://darkti.de/mission-board?_data'
 
-def get_missions():
-    mission_list = {}
-    try:
-        url = 'https://darkti.de/mission-board?_data'
-        response = urlopen(url)
+
+def get_missions(url=maelstroom):
+    mission_list = []
+
+    with urlopen(url) as response:
         response_data = json.loads(response.read())
-        mission_list = response_data['missions']
+        if url == darkti_dot_de:
+            mission_list = response_data['missions']
+        if url == maelstroom:
+            mission_list = list(response_data.values())
         logger.info(f"Successfully fetched missions from darkti.de ({len(mission_list)} current missions)")
-    except Exception as e:
-        logger.error(f'Failed getting missions... {e}')
-    return mission_list
+        return mission_list
+
