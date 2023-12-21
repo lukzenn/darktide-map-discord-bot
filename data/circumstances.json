@@ -1,0 +1,164 @@
+{
+    "default": {
+        "name": "Standard",
+        "tough": false
+    },
+    "hunting_grounds_less_resistance_01": {
+        "short": "Low-Int Hunting Grounds",
+        "emoji": ":dog2:",
+        "tough": false
+    },
+    "Hunting Grounds": {
+        "short": "Hunting Grounds",
+        "emoji": ":dog2:",
+        "tough": false
+    },
+    "Low-Intensity Gauntlet (Power Supply Interruption)": {
+        "short": "Low-Int Power Supply",
+        "tough": false
+    },
+    "less_resistance_01": {
+        "name": "Low-Intensity",
+        "short": "Low-Int",
+        "tough": false
+    },
+    "Power Supply Interruption": {
+        "short": "Power Supply Interruption",
+        "tough": false
+    },
+    "Hunting Grounds (Power Supply Interruption)": {
+        "short": "Hunting Grounds Power Supply Interruption",
+        "tough": false
+    },
+    "waves_of_specials_less_resistance_01": {
+        "name": "Low-Intensity Shock Troop Gauntlet",
+        "short": "Hunting Grounds Power Supply Interruption",
+        "tough": false
+    },
+    "more_resistance_01": {
+        "name": "Hi-Intensity",
+        "short": "Hi-Int",
+        "emoji": "",
+        "tough": true
+    },
+    "waves_of_specials_more_resistance_01": {
+        "name": "Hi-Intensity Shock Troop Gauntlet",
+        "short": "Hi-Int Shock Troop Gauntlet",
+        "emoji": ":boxing_glove:",
+        "tough": true
+    },
+    "hunting_grounds_more_resistance_01": {
+        "name": "Hi-Intensity Gauntlet (Hunting Grounds)",
+        "short": "Hi-Int Hunting Grounds",
+        "emoji": ":dog2:",
+        "tough": true
+    },
+    "darkness_more_resistance_01": {
+        "name": "Hi-Intensity Gauntlet (Power Supply Interruption)",
+        "short": "Hi-Int Power Supply Interruption",
+        "emoji": ":new_moon:",
+        "tough": true
+    },
+    "High challenge low intensity": {
+        "name": "Elite Resistance",
+        "short": "Elite Resistance",
+        "emoji": ":woman_lifting_weight:",
+        "tough": true
+    },
+    "waves_of_specials_01": {
+        "name": "Shock Troop Gauntlet",
+        "short": "Shock Troop Gauntlet",
+        "emoji": ":gloves:",
+        "tough": true
+    },
+    "ventilation_purge_with_snipers_more_resistance_01": {
+        "name": "Hi-Intensity Sniper Gauntlet (Ventilation Purge)",
+        "short": "Hi-Int Ventilation Purge",
+        "emoji": ":gloves:",
+        "tough": true
+    },
+    "flash_mission_01": {
+        "name": "Monstrous Shock Troop Gauntlet (I-II)"
+    },
+    "flash_mission_02": {
+        "name": "Nurgle-Blessed Shock Troop Gauntlet (I-E)"
+    },
+    "flash_mission_03": {
+        "name": "Shock Troop Gauntlet (Hunting Grounds) (I-III)"
+    },
+    "flash_mission_04": {
+        "name": "Nurgle-Blessed Hunting Grounds (Cooldowns Reduced) (I-E-F)"
+    },
+    "flash_mission_05": {
+        "name": "Monstrous Shock Troop Gauntlet (Power Supply Interruption) (A-I-II)"
+    },
+    "flash_mission_06": {
+        "name": "Shock Troop & Snipers Gauntlet (Ventilation Purge) (B-I-IV)"
+    },
+    "flash_mission_07": {
+        "name": "Shock Troop Gauntlet (Melee Scab Enemies Only) (C-I-VI)"
+    },
+    "flash_mission_08": {
+        "name": "Shock Troop & Mutants Gauntlet (Hunting Grounds) (Cooldowns Reduced) (I-III-VII-F)"
+    },
+    "flash_mission_09": {
+        "name": "Ventilation Purge (Ranged Scab Enemies Only) (Cooldowns Reduced) (B-VIII-V-F)"
+    },
+    "flash_mission_10": {
+        "name": "Nurgle-Blessed Monstrous Shock Troop Gauntlet (Scab Enemies Only) (Extra Grenades) (I-II-V-E-G)"
+    },
+    "flash_mission_11": {
+        "name": "Shock Troop & Poxbursters Gauntlet With Snipers (Extra Grenades & Extra Barrels) (D-I-IV-IX-G)"
+    },
+    "flash_mission_12": {
+        "name": "Mutants & Poxbursters Gauntlet (Hunting Grounds) (Extra Grenades & Extra Barrels) (D-III-VII-IX-G)"
+    },
+    "flash_mission_13": {
+        "name": "Nurgle-Blessed Shock Troop & Mutants Gauntlet (Cooldowns Reduced & Extra Barrels) (I-IX-E-F)"
+    },
+    "flash_mission_14": {
+        "name": "Speedrun Challenge (Cooldowns Reduced)"
+    },
+    "high_flash_mission_01": {
+        "name": "Hi-Intensity Monstrous Shock Troop Gauntlet (I-II)"
+    },
+    "high_flash_mission_02": {
+        "name": "Hi-Intensity Nurgle-Blessed Shock Troop Gauntlet (I-E)"
+    },
+    "high_flash_mission_03": {
+        "name": "Hi-Intensity Shock Troop Gauntlet (Hunting Grounds) (I-III)"
+    },
+    "high_flash_mission_04": {
+        "name": "Hi-Intensity Nurgle-Blessed Hunting Grounds (Cooldowns Reduced) (I-E-F)"
+    },
+    "high_flash_mission_05": {
+        "name": "Hi-Intensity Monstrous Shock Troop Gauntlet (Power Supply Interruption) (A-I-II)"
+    },
+    "high_flash_mission_06": {
+        "name": "Hi-Intensity Shock Troop & Snipers Gauntlet (Ventilation Purge) (B-I-IV)"
+    },
+    "high_flash_mission_07": {
+        "name": "Hi-Intensity Shock Troop Gauntlet (Melee Scab Enemies Only) (C-I-VI)"
+    },
+    "high_flash_mission_08": {
+        "name": "Hi-Intensity Shock Troop & Mutants Gauntlet (Hunting Grounds) (Cooldowns Reduced) (I-III-VII-F)"
+    },
+    "high_flash_mission_09": {
+        "name": "Hi-Intensity Ventilation Purge (Ranged Scab Enemies Only) (Cooldowns Reduced) (B-VIII-V-F)"
+    },
+    "high_flash_mission_10": {
+        "name": "Hi-Intensity Nurgle-Blessed Monstrous Shock Troop Gauntlet (Scab Enemies Only) (Extra Grenades) (I-II-V-E-G)"
+    },
+    "high_flash_mission_11": {
+        "name": "Hi-Intensity Shock Troop & Poxbursters Gauntlet With Snipers (Extra Grenades & Extra Barrels) (D-I-IV-IX-G)"
+    },
+    "high_flash_mission_12": {
+        "name": "Hi-Intensity Mutants & Poxbursters Gauntlet (Hunting Grounds) (Extra Grenades & Extra Barrels) (D-III-VII-IX-G)"
+    },
+    "high_flash_mission_13": {
+        "name": "Hi-Intensity Nurgle-Blessed Shock Troop & Mutants Gauntlet (Cooldowns Reduced & Extra Barrels) (I-IX-E-F)"
+    },
+    "high_flash_mission_14": {
+        "name": "Hi-Intensity Speedrun Challenge (Cooldowns Reduced)"
+    }
+}
