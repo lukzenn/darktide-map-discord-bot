@@ -8,8 +8,16 @@ import mission_getter
 from datetime import datetime
 import json
 from base_logger import logger
+import os
 
-mission_cache = SqliteDict("data/mission_cache.sqlite3")
+cache_file = "data/mission_cache.sqlite3"
+
+# If cache is >30MB, turns it into a backup so that it can start fresh
+if os.path.exists(cache_file) and os.path.getsize(cache_file) > 30000000:
+    os.rename(cache_file, f"data/mission_cache_{datetime.today().strftime('%Y-%m-%d')}.sqlite3_bkp")
+
+
+mission_cache = SqliteDict(cache_file)
 
 # DICTIONARIES
 # data/map_names has all the map names
@@ -48,6 +56,8 @@ def is_maelstrom(mission):
 
 # A mission is considered not tough if it's not Damnation, or if. True if tough:True or if unknown
 def is_tough(mission):
+    if is_maelstrom(mission):
+        return True
     if mission['challenge'] < 5:
         return False
     if not has_modifiers(mission):
@@ -73,7 +83,7 @@ def has_modifiers(mission):
 def get_recent_missions(since_seconds_ago, *args):
     update_missions()
 
-    since_timestamp = datetime.timestamp(datetime.now()) - since_seconds_ago
+    since_timestamp = int(datetime.timestamp(datetime.utcnow()) - since_seconds_ago)
 
     cached_missions = [*mission_cache.items()]
     cached_missions.reverse()
@@ -117,9 +127,9 @@ def get_interesting_and_recent(since_seconds_ago):
 
 
 # Fetch current missions, prep data and store into cache as id:Dict
-def update_missions():
+def update_missions(url = mission_getter.maelstroom):
     logger.info(f"{len(mission_cache)} already in cache. Updating...")
-    current_missions = mission_getter.get_missions()
+    current_missions = mission_getter.get_missions(url)
     for mission in current_missions:
         mission = prep_mission_data(mission)
         map_id = mission["id"]
