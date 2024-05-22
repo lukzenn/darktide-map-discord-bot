@@ -26,4 +26,3 @@ Posts tough Damnation maps from the last 12 hours (maximum 13   missions). Add a
 
 `/unsubscribe`  
 Unsubscribes the current channel from receiving regular updates on Maelstrom maps.
-

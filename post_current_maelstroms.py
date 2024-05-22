@@ -45,3 +45,5 @@ if __name__ == '__main__':
         exit()
     else:
         post_to_all_subscribers(message)
+
+# post_to_all_subscribers(":warning:-----Maintenance-----:warning:\nWe're currently experiencing trouble accessing the darkti.de mission board.\nPlease hang tight while we're exploring our options. Reach out to @lukzenn for any questions or feedback. The Emperor protects.")

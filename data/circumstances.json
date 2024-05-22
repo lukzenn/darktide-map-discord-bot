@@ -74,8 +74,17 @@
     "ventilation_purge_with_snipers_more_resistance_01": {
         "name": "Hi-Intensity Sniper Gauntlet (Ventilation Purge)",
         "short": "Hi-Int Ventilation Purge",
-        "emoji": ":gloves:",
         "tough": true
+    },
+    "ventilation_purge_01": {
+        "name": "Ventilation Purge",
+        "short": "Ventilation Purge",
+        "tough": false
+    },
+    "ventilation_purge_less_resistance_01": {
+        "name": "Low-Intensity Ventilation Purge",
+        "short": "Lo-Int Ventilation Purge",
+        "tough": false
     },
     "flash_mission_01": {
         "name": "Monstrous Shock Troop Gauntlet (I-II)"

@@ -24,9 +24,8 @@ def subscribe(channel_id=str, guild_name=str, owner_id=str):
     else:
         subs[channel_id] = {"channel_id": str(channel_id), "guild_name": guild_name, "owner_id": str(owner_id)}
         write_subscriptions(subs)
-        return ":first_quarter_moon: **Channel subscribed!** Every 30 minutes the bot will check for tough missions, " \
-               "and post them here (if there are any).\nIf this is a restricted channel, make sure the bot has " \
-               "permissions to send messages."
+        return ":first_quarter_moon: **Channel subscribed!** Every hour the bot will post fresh Maelstrom missions here.\n" \
+               "Use the mod ManyMoreTries to play any mission less than 24h old."
 
 
 def unsubscribe(channel_id=str):

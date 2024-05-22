@@ -18,6 +18,6 @@ def get_missions(url=maelstroom):
             mission_list = response_data['missions']
         if url == maelstroom:
             mission_list = list(response_data.values())
-        logger.info(f"Successfully fetched missions from darkti.de ({len(mission_list)} current missions)")
+        logger.info(f"Successfully fetched missions from {url} ({len(mission_list)} current missions)")
         return mission_list
 
